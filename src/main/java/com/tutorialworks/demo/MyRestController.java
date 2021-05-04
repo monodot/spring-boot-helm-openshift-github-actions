@@ -12,7 +12,7 @@ public class MyRestController {
 
     @GetMapping("/cheese")
     public String getFavouriteCheese() {
-        return "My favourite cheese is: " + favouriteCheese;
+        return "My really favourite cheese is: " + favouriteCheese;
     }
 
 }
