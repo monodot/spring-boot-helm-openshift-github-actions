@@ -118,10 +118,11 @@ jobs:
       run: |
         echo "APP_NAME=$(basename $PWD)" | tee -a $GITHUB_ENV
 
+    # Use the branch name as the image tag
     - name: Determine tag
       if: env.TAG == ''
       run: |
-        echo "TAG=${GITHUB_SHA::7}" | tee -a $GITHUB_ENV
+        echo "TAG=${GITHUB_REF##*/}" | tee -a $GITHUB_ENV
 
     # https://github.com/redhat-actions/buildah-build#readme
     - name: Build from Dockerfile
