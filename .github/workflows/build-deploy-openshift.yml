@@ -126,11 +126,12 @@ jobs:
         echo "TAG=${GITHUB_REF##*/}" | tee -a $GITHUB_ENV
 
     # Determine the target namespace based on the branch
+    # If 'main', deploy to prod namespace, otherwise deploy to the dev namespace
     - name: Determine namespace
       run: |
         [ "$TAG" == "main" ] && OPENSHIFT_NAMESPACE=${OPENSHIFT_NAMESPACE_PROD} || OPENSHIFT_NAMESPACE=${OPENSHIFT_NAMESPACE_DEV}
 
-        echo $OPENSHIFT_NAMESPACE | tee -a $GITHUB_ENV
+        echo "OPENSHIFT_NAMESPACE=${OPENSHIFT_NAMESPACE}" | tee -a $GITHUB_ENV
 
     # https://github.com/redhat-actions/buildah-build#readme
     - name: Build from Dockerfile
