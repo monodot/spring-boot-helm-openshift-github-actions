@@ -56,7 +56,7 @@ env:
   OPENSHIFT_NAMESPACE: toms-temp
 
   # If you wish to manually provide the APP_NAME and TAG, set them here, otherwise they will be auto-detected.
-  APP_NAME: demoapp
+  APP_NAME: ""
   TAG: ""
 
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
