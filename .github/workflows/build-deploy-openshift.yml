@@ -56,14 +56,12 @@ env:
   OPENSHIFT_NAMESPACE: toms-temp
 
   # If you wish to manually provide the APP_NAME and TAG, set them here, otherwise they will be auto-detected.
-  APP_NAME: ""
+  APP_NAME: demoapp
   TAG: ""
 
-on:
-  # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
-  push:
-    # Edit to the branch(es) you want to build and deploy on each push.
-    branches: [ main ]
+# https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+# Trigger this workflow to run when a push is made to ANY branch
+on: push
 
 jobs:
   openshift-ci-cd:
@@ -119,6 +117,7 @@ jobs:
         echo "APP_NAME=$(basename $PWD)" | tee -a $GITHUB_ENV
 
     # Use the branch name as the image tag
+    # The branch name is extracted from the GITHUB_REF environment variable
     - name: Determine tag
       if: env.TAG == ''
       run: |
