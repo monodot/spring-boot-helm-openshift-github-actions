@@ -53,7 +53,7 @@ env:
   APP_PORT: 8080
 
   # ⬇️ EDIT if you wish to set the kube context's namespace after login. Leave blank to use the default namespace.
-  OPENSHIFT_NAMESPACE: ""
+  OPENSHIFT_NAMESPACE: toms-temp
 
   # If you wish to manually provide the APP_NAME and TAG, set them here, otherwise they will be auto-detected.
   APP_NAME: ""
@@ -167,6 +167,8 @@ jobs:
     # Helm is already installed into GitHub's Ubuntu runner
     - name: Helm install
       run: |
-        helm install --set image.tag=${TAG} \
+        helm upgrade --install \
+          --set image.tag=${TAG} \
           --set fullnameOverride=${APP_NAME}-${TAG} \
+          --namespace ${OPENSHIFT_NAMESPACE} \
           ${APP_NAME}-${TAG} helm/myapp
