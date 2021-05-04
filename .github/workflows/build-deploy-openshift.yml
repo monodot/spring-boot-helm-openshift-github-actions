@@ -162,3 +162,11 @@ jobs:
         openshift_token: ${{ env.OPENSHIFT_TOKEN }}
         insecure_skip_tls_verify: true
         namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+
+    # Install the app into the cluster with Helm, setting the app name to "myapp-<TAG>"
+    # Helm is already installed into GitHub's Ubuntu runner
+    - name: Helm install
+      run: |
+        helm install --set image.tag=${TAG} \
+          --set fullnameOverride=${APP_NAME}-${TAG} \
+          ${APP_NAME}-${TAG} helm/myapp
