@@ -12,7 +12,7 @@ image:
 
 config:
   favourite:
-    cheese: Emmental
+    cheese: Gouda
   management:
     endpoints:
       include: health
