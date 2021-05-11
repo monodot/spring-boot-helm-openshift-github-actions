@@ -13,6 +13,9 @@ Build and push an image first:
     podman build -t quay.io/YOURNAME/spring-boot-helm-openshift-github-actions .
     podman push quay.io/YOURNAME/spring-boot-helm-openshift-github-actions:latest
 
+    docker build -t quay.io/YOURNAME/spring-boot-helm-openshift-github-actions .
+    docker push quay.io/YOURNAME/spring-boot-helm-openshift-github-actions:latest
+
 Once the image has been pushed, install the app into your cluster with this Helm command:
 
     helm install \
