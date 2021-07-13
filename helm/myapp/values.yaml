@@ -5,10 +5,18 @@
 replicaCount: 1
 
 image:
-  repository: quay.io/monodot/spring-boot-helm-openshift-github-actions
+  repository: quay.io/swinches/spring-boot-helm-openshift-github-actions
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
+
+config:
+  favourite:
+    cheese: Brie
+  management:
+    endpoints:
+      include: health
+
 
 imagePullSecrets: []
 nameOverride: ""
@@ -52,6 +60,11 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+route:
+  enabled: true
+  host: null
+  targetPort: http
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
