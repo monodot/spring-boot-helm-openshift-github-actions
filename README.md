@@ -41,12 +41,10 @@ Get the Service Account's authentication token. Extract it from the Secret that 
 ```
 oc describe secret github-robot-token-xxxxx
 
-# Extract the "token" value from the Secret and base64-decode it.
-
-echo xxxxxxx | base64 -d
+# Copy the value of 'token' from here (don't base64-decode it!)
 ```
 
-The resulting string will be your `OPENSHIFT_TOKEN` (see below).
+The resulting base64-encoded string (begins with `eyJhb`) is your value for `OPENSHIFT_TOKEN` (see below).
 
 #### Set up the pipeline 
 
@@ -70,3 +68,24 @@ In your GitHub repository, go to Settings &rarr; Secrets and define the followin
 Like this:
 
 ![image](./github-setup.png)
+
+#### Set up environments (untested)
+
+To simulate deploying to production in a different namespace:
+
+Go to repository &rarr; Environments &rarr; "production" (if it doesn't already exist, create it.)
+
+Add an Environment Secret: set `OPENSHIFT_NAMESPACE` to your production namespace (e.g. `toms-prod`)
+
+Under Deployment Branches, configure this environment to apply to _Selected branches_, and add `main`. This means that these environment settings will only apply when the pipeline runs from this branch.
+
+#### Create the prod project in the cluster
+
+Create the 'production' project and grant the Service Account permissions to deploy into it:
+
+```
+oc new-project toms-prod
+
+oc policy add-role-to-user edit system:serviceaccount:toms-temp:github-robot
+```
+
