@@ -2,6 +2,8 @@
 
 [![Docker Repository on Quay](https://quay.io/repository/monodot/spring-boot-helm-openshift-github-actions/status "Docker Repository on Quay")](https://quay.io/repository/monodot/spring-boot-helm-openshift-github-actions)
 
+<img src="https://media.giphy.com/media/VXFIj6rXAtAvS/giphy.gif"/>
+
 ## Setup
 
 ### Build and deploy from scratch
